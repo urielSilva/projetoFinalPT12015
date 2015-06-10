@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :jobs
   resources :meetings
   resources :members
   # The priority is based upon order of creation: first created -> highest priority.
