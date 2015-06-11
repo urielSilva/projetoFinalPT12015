@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agenda name:</strong>
+  <%= @agenda.agenda_name %>
+</p>
+
+<p>
+  <strong>Agenda description:</strong>
+  <%= @agenda.agenda_description %>
+</p>
+
+<p>
+  <strong>Agenda date:</strong>
+  <%= @agenda.agenda_date %>
+</p>
+
+<%= link_to 'Edit', edit_agenda_path(@agenda) %> |
+<%= link_to 'Back', agendas_path %>

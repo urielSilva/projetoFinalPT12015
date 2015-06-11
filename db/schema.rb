@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610044332) do
+ActiveRecord::Schema.define(version: 20150611195745) do
+
+  create_table "agendas", force: :cascade do |t|
+    t.string   "agenda_name",        limit: 255
+    t.string   "agenda_description", limit: 255
+    t.date     "agenda_date"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name_job",   limit: 255
