@@ -15,5 +15,10 @@
   <%= @meeting.meeting_date %>
 </p>
 
+<p>
+  <strong>Agenda id:</strong>
+  <%= @meeting.agenda_id %>
+</p>
+
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
 <%= link_to 'Back', meetings_path %>

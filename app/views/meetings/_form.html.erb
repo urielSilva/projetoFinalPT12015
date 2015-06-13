@@ -23,6 +23,10 @@
     <%= f.label :meeting_date %><br>
     <%= f.date_select :meeting_date %>
   </div>
+  <div class="field">
+    <%= f.label :agenda_id %>
+    <%= f.select :agenda_id, Agenda.all.collect { |p| [p.agenda_name, p.id] } %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
