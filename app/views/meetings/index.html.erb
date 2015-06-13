@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Name meeting</th>
-      <th>Description meeting</th>
-      <th>Date meeting</th>
+      <th>Meeting name</th>
+      <th>Meeting description</th>
+      <th>Meeting date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,9 +15,9 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= meeting.name_meeting %></td>
-        <td><%= meeting.description_meeting %></td>
-        <td><%= meeting.date_meeting %></td>
+        <td><%= meeting.meeting_name %></td>
+        <td><%= meeting.meeting_description %></td>
+        <td><%= meeting.meeting_date %></td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,9 +1,9 @@
 class CreateMeetings < ActiveRecord::Migration
   def change
     create_table :meetings do |t|
-      t.string :name_meeting
-      t.string :description_meeting
-      t.date :date_meeting
+      t.string :meeting_name
+      t.string :meeting_description
+      t.date :meeting_date
 
       t.timestamps null: false
     end

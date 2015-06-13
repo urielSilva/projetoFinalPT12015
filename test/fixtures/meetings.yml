@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name_meeting: MyString
-  description_meeting: MyString
-  date_meeting: 2015-06-09
+  meeting_name: MyString
+  meeting_description: MyString
+  meeting_date: 2015-06-13
 
 two:
-  name_meeting: MyString
-  description_meeting: MyString
-  date_meeting: 2015-06-09
+  meeting_name: MyString
+  meeting_description: MyString
+  meeting_date: 2015-06-13
