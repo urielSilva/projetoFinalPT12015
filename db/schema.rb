@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150613192036) do
+ActiveRecord::Schema.define(version: 20150613194747) do
 
   create_table "agendas", force: :cascade do |t|
     t.string   "agenda_name",        limit: 255
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150613192036) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.string   "name_job",   limit: 255
+    t.string   "job_name",   limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 20150613192036) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string   "name_member",     limit: 255
-    t.string   "email_member",    limit: 255
-    t.string   "password_member", limit: 255
+    t.string   "member_name",     limit: 255
+    t.string   "member_email",    limit: 255
+    t.string   "member_password", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
