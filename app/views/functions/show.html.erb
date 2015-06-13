@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Function name:</strong>
+  <%= @function.function_name %>
+</p>
+
+<p>
+  <strong>Function module:</strong>
+  <%= @function.function_module %>
+</p>
+
+<p>
+  <strong>Function url:</strong>
+  <%= @function.function_url %>
+</p>
+
+<%= link_to 'Edit', edit_function_path(@function) %> |
+<%= link_to 'Back', functions_path %>

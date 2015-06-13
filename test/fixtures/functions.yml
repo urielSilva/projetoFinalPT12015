@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  function_name: MyString
+  function_module: MyString
+  function_url: MyString
+
+two:
+  function_name: MyString
+  function_module: MyString
+  function_url: MyString
