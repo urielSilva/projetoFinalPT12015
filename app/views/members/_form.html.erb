@@ -23,6 +23,10 @@
     <%= f.label :member_password %><br>
     <%= f.text_field :member_password %>
   </div>
+  <div class="field">
+    <%= f.label :job_id %>
+    <%= f.select :job_id, Job.all.collect { |j| [j.job_name, j.id]} %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

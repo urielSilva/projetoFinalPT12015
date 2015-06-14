@@ -8,6 +8,7 @@
       <th>Member name</th>
       <th>Member email</th>
       <th>Member password</th>
+      <th>Member Job</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= member.member_name %></td>
         <td><%= member.member_email %></td>
         <td><%= member.member_password %></td>
+        <td><%= member.job_id %></td>
         <td><%= link_to 'Show', member %></td>
         <td><%= link_to 'Edit', edit_member_path(member) %></td>
         <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
