@@ -17,7 +17,7 @@
 
 <p>
   <strong>Agenda id:</strong>
-  <%= @meeting.agenda_id %>
+  <%= @meeting.pega_nome (@meeting.agenda_id) %>
 </p>
 
 <%= link_to 'Edit', edit_meeting_path(@meeting) %> |
