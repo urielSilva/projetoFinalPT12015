@@ -1,5 +1,10 @@
 class Meeting < ActiveRecord::Base
 
+  validates :meeting_name, presence: true, length: { maximum: 100 }
+  validates :meeting_description, length: { maximum: 255 }
+  validates :agenda_id, presence: true
+
+
   has_one :agenda
 
   def teste

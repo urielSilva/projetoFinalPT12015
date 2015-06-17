@@ -1,7 +1,7 @@
 class Member < ActiveRecord::Base
 
-  validates :member_email, uniqueness: true
-  validates :member_name, presence: true, length: { minimum: 2 }
+  validates :member_email, uniqueness: true, presence: true
+  validates :member_name, presence: true, length: { minimum: 2, maximum: 100 }
   validates :member_password, presence: true, length: { minimum: 6 }
 
   has_one :job
