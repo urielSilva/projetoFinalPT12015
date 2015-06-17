@@ -4,4 +4,5 @@ class AddAgendaIdToMeetings < ActiveRecord::Migration
   end
 
   add_index :meetings, :agenda_id
+
 end
