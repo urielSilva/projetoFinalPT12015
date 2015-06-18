@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meeting:</strong>
+  <%= @meeting_has_member.pega_reuniao @meeting_has_member.meeting_id %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @meeting_has_member.pega_membro @meeting_has_member.member_id %>
+</p>
+
+<%= link_to 'Edit', edit_meeting_has_member_path(@meeting_has_member) %> |
+<%= link_to 'Back', meeting_has_members_path %>

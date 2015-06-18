@@ -1,10 +1,11 @@
 class Member < ActiveRecord::Base
 
+  has_one :job
+  has_many :meetings, through: :meeting_has_members
+
   validates :member_email, uniqueness: true, presence: true
   validates :member_name, presence: true, length: { minimum: 2, maximum: 100 }
   validates :member_password, presence: true, length: { minimum: 6 }
-
-  has_one :job
 
   before_save :encrypt_password
 
