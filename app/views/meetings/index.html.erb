@@ -19,7 +19,7 @@
         <td><%= meeting.meeting_name %></td>
         <td><%= meeting.meeting_description %></td>
         <td><%= meeting.meeting_date %></td>
-        <td><%= meeting.pega_nome meeting.agenda_id%></td>
+        <td><%= meeting.pega_nome %></td>
         <td><%= link_to 'Show', meeting %></td>
         <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
         <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>

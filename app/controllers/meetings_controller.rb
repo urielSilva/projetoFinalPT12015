@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
   before_action :set_meeting, only: [:show, :edit, :update, :destroy]
 
+
   # GET /meetings
   # GET /meetings.json
   def index
@@ -15,10 +16,13 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   def new
     @meeting = Meeting.new
+    10.times {
+      @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id]) }
   end
 
   # GET /meetings/1/edit
   def edit
+    @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id])
   end
 
   # POST /meetings
@@ -54,6 +58,7 @@ class MeetingsController < ApplicationController
   # DELETE /meetings/1
   # DELETE /meetings/1.json
   def destroy
+    @meeting.pega_relacao.destroy
     @meeting.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
@@ -69,6 +74,7 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit(:meeting_name, :meeting_description, :meeting_date, :agenda_id)
+      params.require(:meeting).permit(:meeting_name, :meeting_description, :meeting_date, :agenda_id,
+                                      meeting_has_members_attributes: [:id, :member_id])
     end
 end

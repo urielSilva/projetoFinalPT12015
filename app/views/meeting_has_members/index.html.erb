@@ -14,8 +14,12 @@
   <tbody>
     <% @meeting_has_members.each do |meeting_has_member| %>
       <tr>
-        <td><%= meeting_has_member.pega_reuniao meeting_has_member.meeting_id %></td>
-        <td><%= meeting_has_member.pega_membro meeting_has_member.member_id %></td>
+        <td><%= meeting_has_member.pega_reuniao  %></td>
+        <% if meeting_has_member.member_id %>
+            <td><%= meeting_has_member.pega_membro  %></td>
+        <% else %>
+            <td>Não possui membros ainda</td>
+        <% end %>
         <td><%= link_to 'Show', meeting_has_member %></td>
         <td><%= link_to 'Edit', edit_meeting_has_member_path(meeting_has_member) %></td>
         <td><%= link_to 'Destroy', meeting_has_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>

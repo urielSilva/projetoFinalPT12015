@@ -3,6 +3,7 @@ class MeetingHasMember < ActiveRecord::Base
   belongs_to :member
   belongs_to :meeting
 
+
   def teste
     @members = Member.all
   end
@@ -11,14 +12,14 @@ class MeetingHasMember < ActiveRecord::Base
     @meetings = Meeting.all
   end
 
-  def pega_membro(id_busca)
+  def pega_membro
     teste
-    @members.find(id_busca).member_name
+    @members.find(self.member_id).member_name if self.member_id
   end
 
-  def pega_reuniao(id_busca)
+  def pega_reuniao
     teste2
-    @meetings.find(id_busca).meeting_name
+    @meetings.find(self.meeting_id).meeting_name if self.meeting_id
   end
 
 end

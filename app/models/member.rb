@@ -1,7 +1,11 @@
 class Member < ActiveRecord::Base
 
   has_one :job
+  has_many :meeting_has_members
   has_many :meetings, through: :meeting_has_members
+
+  accepts_nested_attributes_for :meeting_has_members
+  accepts_nested_attributes_for :meetings
 
   validates :member_email, uniqueness: true, presence: true
   validates :member_name, presence: true, length: { minimum: 2, maximum: 100 }
@@ -17,9 +21,9 @@ class Member < ActiveRecord::Base
     @jobs = Job.all
   end
 
-  def pega_job(id_pesq)
+  def pega_job
     teste
-    @jobs.find(id_pesq).job_name
+    @jobs.find(self.job_id).job_name if self.job_id
   end
 
 end

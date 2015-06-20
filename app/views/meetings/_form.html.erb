@@ -27,6 +27,10 @@
     <%= f.label :agenda_id %>
     <%= f.select :agenda_id, Agenda.all.collect { |p| [p.agenda_name, p.id] } %>
   </div>
+    <%= f.fields_for :meeting_has_members do |b_form| %>
+    <%= b_form.label :member_id %><br>
+    <%= b_form.select :member_id, Member.all.collect { |m| [m.member_name, m.id]}, :include_blank => true %><br><br>
+    <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
