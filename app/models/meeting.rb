@@ -32,4 +32,6 @@ class Meeting < ActiveRecord::Base
     @meeting_has_members.find_by meeting_id: self.id
   end
 
+
+
 end

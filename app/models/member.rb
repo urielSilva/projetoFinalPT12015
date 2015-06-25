@@ -1,15 +1,21 @@
 class Member < ActiveRecord::Base
 
   has_one :job
-  has_many :meeting_has_members
+  has_many :meeting_has_members, dependent: :destroy
   has_many :meetings, through: :meeting_has_members
 
-  accepts_nested_attributes_for :meeting_has_members
+  accepts_nested_attributes_for :meeting_has_members,
+                                allow_destroy: true
   accepts_nested_attributes_for :meetings
 
-  validates :member_email, uniqueness: true, presence: true
-  validates :member_name, presence: true, length: { minimum: 2, maximum: 100 }
-  validates :member_password, presence: true, length: { minimum: 6 }
+  validates :member_email,
+            uniqueness: true, presence: true
+  validates :member_name,
+            presence: true,
+            length: { minimum: 2, maximum: 100 }
+  validates :member_password,
+            presence: true,
+            length: { minimum: 6 }
 
   before_save :encrypt_password
 
@@ -25,5 +31,6 @@ class Member < ActiveRecord::Base
     teste
     @jobs.find(self.job_id).job_name if self.job_id
   end
+
 
 end
