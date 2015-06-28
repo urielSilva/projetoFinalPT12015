@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :job_has_functions
   resources :meeting_has_members
   resources :members
   resources :jobs
