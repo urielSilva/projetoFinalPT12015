@@ -12,6 +12,24 @@
     Não possui membros
   <% end %>
 </p>
+  <strong>Mandotory:</strong>
+  <% if @meeting_has_member.meeting_mandatory ==0 %>
+  	obrigatório
+  <% else %>
+    não obrigado
+  <% end %>
+</p>
+  <p>
+   <strong>Presence:</strong>
+  <% case @meeting_has_member.meeting_presence %> 
+    <% when 1 %> 
+      faltou 
+    <% when 2 %>
+      falta justificada
+     <% when 3%>
+      presente
+    <% end %>
+</p>
 
 <%= link_to 'Edit', edit_meeting_has_member_path(@meeting_has_member) %>
 <%= link_to 'Back', meeting_has_members_path %>

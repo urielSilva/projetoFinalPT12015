@@ -27,10 +27,19 @@
     <%= f.label :agenda_id %>
     <%= f.select :agenda_id, Agenda.all.collect { |p| [p.agenda_name, p.id] } %>
   </div>
+  <div class="field">
     <%= f.fields_for :meeting_has_members do |b_form| %>
     <%= b_form.label :member_id %><br>
-    <%= b_form.select :member_id, Member.all.collect { |m| [m.member_name, m.id]}, :include_blank => true %><br><br>
+    <%= b_form.select :member_id, Member.all.collect { |m| [m.member_name, m.id]}, :include_blank => true %><br>
+    <%= b_form.label 'Mandatory_meeting_não', 'Não obrigado' %>
+    <%= b_form.radio_button :meeting_mandatory, 1 %>
+    <%= b_form.label 'Mandatory_meeting_sim', 'Obrigado' %>
+    <%= b_form.radio_button :meeting_mandatory, 0 %><br><br>
+    <%= b_form.label :meeting_presence %><br>
+    <%= b_form.select(:meeting_presence, options_for_select([['Faltou', 1], ['Falta justificada', 2], ['presente', 3]])) %><br>
+
     <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

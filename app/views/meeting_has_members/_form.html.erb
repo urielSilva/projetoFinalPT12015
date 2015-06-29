@@ -19,6 +19,16 @@
     <%= f.label :member_id %><br>
     <%= f.select :member_id, Member.all.collect { |m| [ m.member_name, m.id ] } %>
   </div>
+  <div class="field">
+    <%= f.label 'Meeting_mandatory_não', 'Não obrigado' %>
+    <%= f.radio_button :meeting_mandatory, 1 %>
+    <%= f.label 'Meeting_mandatory_sim', 'Obrigado' %>
+    <%= f.radio_button :meeting_mandatory, 0 %><br>
+  </div>
+  <div class="field">
+    <%= f.label :meeting_presence %><br>
+    <%= f.select(:meeting_presence, options_for_select([['Faltou', 1], ['Falta justificada', 2], ['presente', 3]])) %><br>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

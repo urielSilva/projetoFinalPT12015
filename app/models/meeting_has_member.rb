@@ -2,6 +2,8 @@ class MeetingHasMember < ActiveRecord::Base
 
   belongs_to :member
   belongs_to :meeting
+  validates :meeting_mandatory,
+            :presence => { :if => 'meeting_mandatory.nil?' }
 
 
   def teste
