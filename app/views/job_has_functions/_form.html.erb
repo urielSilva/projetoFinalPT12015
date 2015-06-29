@@ -1,0 +1,25 @@
+<%= form_for(@job_has_function) do |f| %>
+  <% if @job_has_function.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job_has_function.errors.count, "error") %> prohibited this job_has_function from being saved:</h2>
+
+      <ul>
+      <% @job_has_function.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :job_id %><br>
+    <%= f.select :job_id, Job.all.collect { |m| [ m.job_name, m.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :function_id %><br>
+    <%= f.select :function_id, Function.all.collect { |m| [ m.function_name, m.id ] } %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
