@@ -3,6 +3,6 @@ class AddAgendaIdToMeetings < ActiveRecord::Migration
     add_column :meetings, :agenda_id, :integer
   end
 
-#  add_index :meetings, :agenda_id
+  add_index :meetings, :agenda_id
 
 end

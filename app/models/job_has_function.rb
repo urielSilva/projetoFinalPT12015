@@ -1,6 +1,6 @@
 class JobHasFunction < ActiveRecord::Base
 
-	belongs_to :member
-	belongs_to :meeting
+	belongs_to :job
+	belongs_to :function
 
 end
