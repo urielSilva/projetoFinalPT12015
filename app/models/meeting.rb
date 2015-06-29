@@ -1,7 +1,7 @@
 class Meeting < ActiveRecord::Base
 
   has_one :agenda
-  has_many :meeting_has_members
+  has_many :meeting_has_members, dependent: :destroy
   has_many :members, through: :meeting_has_members
 
   accepts_nested_attributes_for :meeting_has_members,
@@ -26,12 +26,6 @@ class Meeting < ActiveRecord::Base
     teste
     @agendas.find(self.agenda_id).agenda_name if self.agenda_id
   end
-
-  def pega_relacao
-    teste2
-    @meeting_has_members.find_by meeting_id: self.id
-  end
-
 
 
 end
