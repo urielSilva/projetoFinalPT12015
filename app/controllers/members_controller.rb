@@ -64,11 +64,13 @@ class MembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.find(params[:id])
+      @member = Member.includes(:meeting_has_members).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:member_name, :member_email, :member_password, :job_id)
+      params.require(:member).permit(:member_name, :member_email, :member_password, :job_id,
+                                     :meeting_has_members_attributes,
+                                     :meetings_attributes)
     end
 end

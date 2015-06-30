@@ -27,10 +27,13 @@ class Member < ActiveRecord::Base
     @jobs = Job.all
   end
 
+  def teste2
+    @meeting_has_members = MeetingHasMember.all
+  end
+
   def pega_job
     teste
     @jobs.find(self.job_id).job_name if self.job_id
   end
-
 
 end

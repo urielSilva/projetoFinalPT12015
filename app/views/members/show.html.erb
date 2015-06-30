@@ -20,5 +20,12 @@
   <%= @member.pega_job %>
 </p>
 
+<p>
+  <strong>Reuniões: </strong>
+    <% @member.meeting_has_members.find_each do |m| %>
+        <%= m.meeting.meeting_name %>
+    <% end %>
+</p>
+
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
