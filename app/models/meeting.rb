@@ -27,5 +27,4 @@ class Meeting < ActiveRecord::Base
     @agendas.find(self.agenda_id).agenda_name if self.agenda_id
   end
 
-
 end
