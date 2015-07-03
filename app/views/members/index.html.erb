@@ -1,33 +1,36 @@
 <p id="notice"><%= notice %></p>
+<div class="container col-md-12 text-center well">
+    <h1>Listing Members</h1>
+</div>
+<div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Member name</th>
+          <th>Member email</th>
+          <th>Member password</th>
+          <th>Member Job</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<h1>Listing Members</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Member name</th>
-      <th>Member email</th>
-      <th>Member password</th>
-      <th>Member Job</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @members.each do |member| %>
-      <tr>
-        <td><%= member.member_name %></td>
-        <td><%= member.member_email %></td>
-        <td><%= member.member_password %></td>
-        <td><%= member.pega_job %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= member.member_name %></td>
+            <td><%= member.member_email %></td>
+            <td><%= member.member_password %></td>
+            <td><%= member.pega_job %></td>
+            <td><%= link_to 'Show', member, class: "" %></td>
+            <td><%= link_to 'Edit', edit_member_path(member) %></td>
+            <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 <br>
 
-<%= link_to 'New Member', new_member_path %>
+<div class="container text-center teste">
+    <%= link_to 'New Member', new_member_path, class: "btn btn-primary" %>
+</div>
