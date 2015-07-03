@@ -36,4 +36,9 @@ class Member < ActiveRecord::Base
     @jobs.find(self.job_id).job_name if self.job_id
   end
 
+  def a(password)
+    password= Digest::MD5::hexdigest(password)
+    self.member_password==password
+  end
+
 end
