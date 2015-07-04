@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Job name:</strong>
   <%= @job.job_name %>
 </p>
 
-<%= link_to 'Edit', edit_job_path(@job) %> |
+<% if logged_in? && current_user.admin?%>
+    <%= link_to 'Edit', edit_job_path(@job) %>
+<% end %>
+
 <%= link_to 'Back', jobs_path %>

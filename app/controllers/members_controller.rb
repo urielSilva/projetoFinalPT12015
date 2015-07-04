@@ -17,7 +17,7 @@ class MembersController < ApplicationController
     if logged_in? && admin?
       @member = Member.new
     else
-      flash.now[:danger] = 'Somente o administrador pode adicionar membros'
+      flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
     end
   end
@@ -29,16 +29,21 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(member_params)
+    if logged_in? && current_user.admin?
+      @member = Member.new(member_params)
 
-    respond_to do |format|
-      if @member.save
-        format.html { redirect_to @member }
-        format.json { render :show, status: :created, location: @member }
-      else
-        format.html { render :new }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @member.save
+          format.html { redirect_to @member }
+          format.json { render :show, status: :created, location: @member }
+        else
+          format.html { render :new }
+          format.json { render json: @member.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
@@ -59,10 +64,15 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    @member.destroy
-    respond_to do |format|
-      format.html { redirect_to members_url }
-      format.json { head :no_content }
+    if logged_in? && current_user.admin?
+      @member.destroy
+      respond_to do |format|
+        format.html { redirect_to members_url }
+        format.json { head :no_content }
+      end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
