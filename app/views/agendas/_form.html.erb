@@ -1,29 +1,36 @@
-<%= form_for(@agenda) do |f| %>
-  <% if @agenda.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
+<div class="text-center">
+    <%= form_for(@agenda) do |f| %>
+      <% if @agenda.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@agenda.errors.count, "error") %> prohibited this agenda from being saved:</h2>
 
-      <ul>
-      <% @agenda.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @agenda.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :agenda_name %><br>
-    <%= f.text_field :agenda_name %>
-  </div>
-  <div class="field">
-    <%= f.label :agenda_description %><br>
-    <%= f.text_area :agenda_description %>
-  </div>
-  <div class="field">
-    <%= f.label :agenda_date %><br>
-    <%= f.date_select :agenda_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+      <div class="field form-group">
+        <%= f.label :agenda_name, "Pauta" %><br>
+        <%= f.text_field :agenda_name, class: "form-control" %>
+      </div>
+      <div class="field  form-group">
+        <%= f.label :agenda_description, "Descrição" %><br>
+        <%= f.text_area :agenda_description, class: "form-control"  %>
+      </div>
+      <div class="field  form-group">
+        <%= f.label :agenda_date, "Data" %><br>
+        <%= f.date_select :agenda_date, class: "form-control"  %>
+      </div>
+
+      <div class="actions col-md-12 text-center">
+        <%= f.submit "Criar Pauta" ,class: "btn btn-success" %>
+
+      </div><br><br>
+      <div class="col-md-12 text-center">
+      <%= link_to 'Voltar', agendas_path, class: "btn btn-default" %>
+      </div><br><br>
+    <% end %>
+</div>
