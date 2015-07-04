@@ -5,12 +5,21 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+    if logged_in?
+      @meetings = Meeting.all
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /meetings/new
@@ -27,13 +36,20 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/1/edit
   def edit
-    @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id])
+    if logged_in?
+      @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id])
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # POST /meetings
   # POST /meetings.json
   def create
+    if logged_in?
       @meeting = Meeting.new(meeting_params)
+      @meeting.criador_reuniao(current_user)
 
       respond_to do |format|
         if @meeting.save
@@ -44,12 +60,17 @@ class MeetingsController < ApplicationController
           format.json { render json: @meeting.errors, status: :unprocessable_entity }
         end
       end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # PATCH/PUT /meetings/1
   # PATCH/PUT /meetings/1.json
   def update
-    respond_to do |format|
+    if logged_in?
+      respond_to do |format|
       if @meeting.update(meeting_params)
         format.html { redirect_to @meeting }
         format.json { render :show, status: :ok, location: @meeting }
@@ -57,16 +78,25 @@ class MeetingsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @meeting.errors, status: :unprocessable_entity }
       end
+      end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
   # DELETE /meetings/1
   # DELETE /meetings/1.json
   def destroy
-    @meeting.destroy
-    respond_to do |format|
-      format.html { redirect_to meetings_url }
-      format.json { head :no_content }
+    if logged_in?
+      @meeting.destroy
+      respond_to do |format|
+        format.html { redirect_to meetings_url }
+        format.json { head :no_content }
+      end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 

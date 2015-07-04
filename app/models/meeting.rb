@@ -27,4 +27,8 @@ class Meeting < ActiveRecord::Base
     @agendas.find(self.agenda_id).agenda_name if self.agenda_id
   end
 
+  def criador_reuniao(current_user)
+    self.meeting_creator = current_user.id
+  end
+
 end

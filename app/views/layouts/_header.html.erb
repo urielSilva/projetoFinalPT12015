@@ -3,7 +3,7 @@
         <%= link_to 'SCP', root_path, class: "navbar-brand" %>
         <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
-                <li><%= link_to current_user.member_name, root_path %></li>
+                <li><%= link_to current_user.member_name, member_path(current_user.id)   %></li>
                 <li><%= link_to 'Reuniões', meetings_path %></li>
                 <li><%= link_to 'Membros', members_path %></li>
                 <li><%=link_to "Log out", logout_path, method: "delete" %></li>

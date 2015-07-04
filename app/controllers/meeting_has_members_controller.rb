@@ -23,50 +23,74 @@ class MeetingHasMembersController < ApplicationController
 
   # GET /meeting_has_members/new
   def new
-    @meeting_has_member = MeetingHasMember.new
+    if logged_in?
+      @meeting_has_member = MeetingHasMember.new
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /meeting_has_members/1/edit
   def edit
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # POST /meeting_has_members
   # POST /meeting_has_members.json
   def create
-    @meeting_has_member = MeetingHasMember.new(meeting_has_member_params)
+    if logged_in?
+      @meeting_has_member = MeetingHasMember.new(meeting_has_member_params)
 
-    respond_to do |format|
-      if @meeting_has_member.save
-        format.html { redirect_to @meeting_has_member }
-        format.json { render :show, status: :created, location: @meeting_has_member }
-      else
-        format.html { render :new }
-        format.json { render json: @meeting_has_member.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @meeting_has_member.save
+          format.html { redirect_to @meeting_has_member }
+          format.json { render :show, status: :created, location: @meeting_has_member }
+        else
+          format.html { render :new }
+          format.json { render json: @meeting_has_member.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
   # PATCH/PUT /meeting_has_members/1
   # PATCH/PUT /meeting_has_members/1.json
   def update
-    respond_to do |format|
-      if @meeting_has_member.update(meeting_has_member_params)
-        format.html { redirect_to @meeting_has_member }
-        format.json { render :show, status: :ok, location: @meeting_has_member }
-      else
-        format.html { render :edit }
-        format.json { render json: @meeting_has_member.errors, status: :unprocessable_entity }
+    if logged_in?
+      respond_to do |format|
+        if @meeting_has_member.update(meeting_has_member_params)
+          format.html { redirect_to @meeting_has_member }
+          format.json { render :show, status: :ok, location: @meeting_has_member }
+        else
+          format.html { render :edit }
+          format.json { render json: @meeting_has_member.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
   # DELETE /meeting_has_members/1
   # DELETE /meeting_has_members/1.json
   def destroy
-    @meeting_has_member.destroy
-    respond_to do |format|
-      format.html { redirect_to meeting_has_members_url }
-      format.json { head :no_content }
+    if logged_in?
+      @meeting_has_member.destroy
+      respond_to do |format|
+        format.html { redirect_to meeting_has_members_url }
+        format.json { head :no_content }
+      end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
