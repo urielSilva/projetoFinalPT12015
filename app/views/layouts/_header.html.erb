@@ -1,13 +1,13 @@
 <div class="navbar navbar-inverse navbar-static-top">
     <div class="container">
-        <%= link_to 'SCP', members_path, class: "navbar-brand" %>
+        <%= link_to 'SCP', root_path, class: "navbar-brand" %>
         <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-            <li><%=link_to "Log out", logout_path, method: "delete" %> </li>
-          	<li><%= link_to current_user.member_name, root_path %></li>
-        <% end %>
-          <li><%= link_to 'Reuniões', meetings_path %></li>
-          <li><%= link_to 'Membros', members_path %></li>
+            <% if logged_in? %>
+                <li><%= link_to current_user.member_name, root_path %></li>
+                <li><%= link_to 'Reuniões', meetings_path %></li>
+                <li><%= link_to 'Membros', members_path %></li>
+                <li><%=link_to "Log out", logout_path, method: "delete" %></li>
+            <% end %>
         </ul>
     </div>
 </div>

@@ -28,7 +28,7 @@ class FunctionsController < ApplicationController
 
     respond_to do |format|
       if @function.save
-        format.html { redirect_to @function, notice: 'Function was successfully created.' }
+        format.html { redirect_to @function }
         format.json { render :show, status: :created, location: @function }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class FunctionsController < ApplicationController
   def update
     respond_to do |format|
       if @function.update(function_params)
-        format.html { redirect_to @function, notice: 'Function was successfully updated.' }
+        format.html { redirect_to @function }
         format.json { render :show, status: :ok, location: @function }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class FunctionsController < ApplicationController
   def destroy
     @function.destroy
     respond_to do |format|
-      format.html { redirect_to functions_url, notice: 'Function was successfully destroyed.' }
+      format.html { redirect_to functions_url }
       format.json { head :no_content }
     end
   end

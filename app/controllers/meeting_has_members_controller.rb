@@ -28,7 +28,7 @@ class MeetingHasMembersController < ApplicationController
 
     respond_to do |format|
       if @meeting_has_member.save
-        format.html { redirect_to @meeting_has_member, notice: 'Meeting has member was successfully created.' }
+        format.html { redirect_to @meeting_has_member }
         format.json { render :show, status: :created, location: @meeting_has_member }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MeetingHasMembersController < ApplicationController
   def update
     respond_to do |format|
       if @meeting_has_member.update(meeting_has_member_params)
-        format.html { redirect_to @meeting_has_member, notice: 'Meeting has member was successfully updated.' }
+        format.html { redirect_to @meeting_has_member }
         format.json { render :show, status: :ok, location: @meeting_has_member }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class MeetingHasMembersController < ApplicationController
   def destroy
     @meeting_has_member.destroy
     respond_to do |format|
-      format.html { redirect_to meeting_has_members_url, notice: 'Meeting has member was successfully destroyed.' }
+      format.html { redirect_to meeting_has_members_url }
       format.json { head :no_content }
     end
   end

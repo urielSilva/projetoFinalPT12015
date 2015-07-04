@@ -28,7 +28,7 @@ class JobHasFunctionsController < ApplicationController
 
     respond_to do |format|
       if @job_has_function.save
-        format.html { redirect_to @job_has_function, notice: 'Job has function was successfully created.' }
+        format.html { redirect_to @job_has_function }
         format.json { render :show, status: :created, location: @job_has_function }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class JobHasFunctionsController < ApplicationController
   def update
     respond_to do |format|
       if @job_has_function.update(job_has_function_params)
-        format.html { redirect_to @job_has_function, notice: 'Job has function was successfully updated.' }
+        format.html { redirect_to @job_has_function }
         format.json { render :show, status: :ok, location: @job_has_function }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class JobHasFunctionsController < ApplicationController
   def destroy
     @job_has_function.destroy
     respond_to do |format|
-      format.html { redirect_to job_has_functions_url, notice: 'Job has function was successfully destroyed.' }
+      format.html { redirect_to job_has_functions_url }
       format.json { head :no_content }
     end
   end

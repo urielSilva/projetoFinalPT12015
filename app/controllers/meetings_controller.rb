@@ -15,9 +15,14 @@ class MeetingsController < ApplicationController
 
   # GET /meetings/new
   def new
-    @meeting = Meeting.new
-    10.times {
-      @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id]) }
+    if logged_in?
+      @meeting = Meeting.new
+      10.times {
+        @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id]) }
+    else
+      flash.now[:danger] = 'Somente membros podem adicionar reuniões'
+      render 'sessions/new'
+    end
   end
 
   # GET /meetings/1/edit
@@ -28,17 +33,17 @@ class MeetingsController < ApplicationController
   # POST /meetings
   # POST /meetings.json
   def create
-    @meeting = Meeting.new(meeting_params)
+      @meeting = Meeting.new(meeting_params)
 
-    respond_to do |format|
-      if @meeting.save
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully created.' }
-        format.json { render :show, status: :created, location: @meeting }
-      else
-        format.html { render :new }
-        format.json { render json: @meeting.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @meeting.save
+          format.html { redirect_to @meeting }
+          format.json { render :show, status: :created, location: @meeting }
+        else
+          format.html { render :new }
+          format.json { render json: @meeting.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # PATCH/PUT /meetings/1
@@ -46,7 +51,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
+        format.html { redirect_to @meeting }
         format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit }
@@ -60,7 +65,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to meetings_url }
       format.json { head :no_content }
     end
   end
