@@ -14,7 +14,7 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    if logged_in? && admin?
+    if logged_in? && current_user.admin?
       @member = Member.new
     else
       flash.now[:danger] = 'Você não possui autorização'
@@ -24,6 +24,10 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    unless logged_in? && (current_user.admin? || current_user.id == @member.id)
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # POST /members
