@@ -1,33 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="container col-md-12 text-center well">
+    <div class="row"><h1>Listing Meeting Has Members</h1></div>
+</div>
 
-<h1>Listing Meeting Has Members</h1>
+<div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-6">Meeting</th>
+          <th class="col-md-6">Member</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Meeting</th>
-      <th>Member</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @meeting_has_members.each do |meeting_has_member| %>
-      <tr>
-        <td><%= meeting_has_member.pega_reuniao  %></td>
-        <% if meeting_has_member.member_id %>
-            <td><%= meeting_has_member.pega_membro  %></td>
-        <% else %>
-            <td>Não possui membros ainda</td>
+      <tbody>
+        <% @meeting_has_members.each do |meeting_has_member| %>
+          <tr>
+            <td class="col-md-6"><%= meeting_has_member.pega_reuniao  %></td>
+            <% if meeting_has_member.member_id %>
+                <td class="col-md-6"><%= meeting_has_member.pega_membro  %></td>
+            <% else %>
+                <td class="col-md-6">Não possui membros ainda</td>
+            <% end %>
+            <td><%= link_to 'Show', meeting_has_member %></td>
+            <td><%= link_to 'Edit', edit_meeting_has_member_path(meeting_has_member) %></td>
+            <td><%= link_to 'Destroy', meeting_has_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
         <% end %>
-        <td><%= link_to 'Show', meeting_has_member %></td>
-        <td><%= link_to 'Edit', edit_meeting_has_member_path(meeting_has_member) %></td>
-        <td><%= link_to 'Destroy', meeting_has_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+</div>
 
 <br>
 
-<%= link_to 'New Meeting has member', new_meeting_has_member_path %>
+<div class="container">
+    <div class="row text-center col-md-12"><%= link_to 'New Meeting has member', new_meeting_has_member_path, class: "btn btn-primary" %></div>
+</div>

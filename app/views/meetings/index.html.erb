@@ -1,33 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="container col-md-12 text-center well">
+    <div class="row"><h1>Listing Meetings</h1></div>
+</div>
 
-<h1>Listing Meetings</h1>
+<div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-4">Meeting name</th>
+          <th class="col-md-4">Meeting date</th>
+          <th class="col-md-4">Meeting agenda</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Meeting name</th>
-      <th>Meeting description</th>
-      <th>Meeting date</th>
-      <th>Meeting agenda</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= meeting.meeting_name %></td>
-        <td><%= meeting.meeting_description %></td>
-        <td><%= meeting.meeting_date %></td>
-        <td><%= meeting.pega_nome %></td>
-        <td><%= link_to 'Show', meeting %></td>
-        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
-        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @meetings.each do |meeting| %>
+          <tr>
+            <td class="col-md-4"><%= meeting.meeting_name %></td>
+            <td class="col-md-4"><%= meeting.meeting_date %></td>
+            <td class="col-md-4"><%= meeting.pega_nome %></td>
+            <td><%= link_to 'Show', meeting %></td>
+            <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
+            <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 
 <br>
 
-<%= link_to 'New Meeting', new_meeting_path %>
+<% if logged_in? %>
+    <div class="container">
+        <div class="row text-center col-md-12"><%= link_to 'New Meeting', new_meeting_path, class: "btn btn-primary" %></div>
+    </div>
+<% end %>
