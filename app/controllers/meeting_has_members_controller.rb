@@ -4,12 +4,21 @@ class MeetingHasMembersController < ApplicationController
   # GET /meeting_has_members
   # GET /meeting_has_members.json
   def index
+    if logged_in?
     @meeting_has_members = MeetingHasMember.all
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /meeting_has_members/1
   # GET /meeting_has_members/1.json
   def show
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /meeting_has_members/new

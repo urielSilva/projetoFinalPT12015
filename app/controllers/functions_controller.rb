@@ -4,12 +4,21 @@ class FunctionsController < ApplicationController
   # GET /functions
   # GET /functions.json
   def index
-    @functions = Function.all
+    if logged_in?
+      @functions = Function.all
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /functions/1
   # GET /functions/1.json
   def show
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /functions/new

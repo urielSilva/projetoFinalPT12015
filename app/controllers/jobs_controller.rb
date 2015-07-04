@@ -4,12 +4,21 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    if logged_in?
+      @jobs = Job.all
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /jobs/new

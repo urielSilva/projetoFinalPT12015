@@ -4,12 +4,21 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    if logged_in?
+      @members = Member.all
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /members/1
   # GET /members/1.json
   def show
+    unless logged_in?
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
+    end
   end
 
   # GET /members/new
@@ -54,14 +63,19 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update
-    respond_to do |format|
-      if @member.update(member_params)
-        format.html { redirect_to @member }
-        format.json { render :show, status: :ok, location: @member }
-      else
-        format.html { render :edit }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
+    if logged_in? && (current_user.admin? || current_user.id == @member.id)
+      respond_to do |format|
+        if @member.update(member_params)
+          format.html { redirect_to @member }
+          format.json { render :show, status: :ok, location: @member }
+        else
+          format.html { render :edit }
+          format.json { render json: @member.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash.now[:danger] = 'Você não possui autorização'
+      render 'sessions/new'
     end
   end
 
