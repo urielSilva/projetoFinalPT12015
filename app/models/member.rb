@@ -42,8 +42,15 @@ class Member < ActiveRecord::Base
   end
 
   def reuniao_vazio?
-     if self.meeting_has_members.count == 0
-     end
+    self.meeting_has_members.count > 0
+  end
+
+  def faltas?
+    self.meeting_has_members.where(meeting_mandatory: 0, meeting_presence: 1).count > 0
+  end
+
+  def faltas
+    self.meeting_has_members.where(meeting_mandatory: 0, meeting_presence: 1)
   end
 
 end

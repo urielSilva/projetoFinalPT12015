@@ -90,7 +90,7 @@ class MembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.includes(:meeting_has_members).find(params[:id])
+      @member = Member.includes(:meeting_has_members).includes(:meetings).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

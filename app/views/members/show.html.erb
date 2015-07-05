@@ -19,11 +19,23 @@
           <strong>Reuniões: </strong><br>
           <% if @member.reuniao_vazio? %>
             <% @member.meeting_has_members.find_each do |m| %>
-                <%= m.meeting.meeting_name %>
+                <%= m.meeting.meeting_name %><br>
             <% end %>
           <% else %>
             Não está em alguma reunião
           <% end %>
+        </p>
+        <p>
+          <strong>Faltas:</strong><br>
+            <% if @member.faltas? %>
+                <% @member.faltas.each do |m| %>
+                    <% if m.meeting.meeting_creator == current_user.id%>
+                        <%= m.meeting.meeting_name %><br>
+                    <% end %>
+                <% end %>
+            <% else %>
+            Não possui faltas
+            <% end %>
         </p>
   </div>
 </div><br><br>
