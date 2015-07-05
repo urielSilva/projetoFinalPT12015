@@ -45,14 +45,12 @@ class AgendasController < ApplicationController
     if logged_in?
       @agenda = Agenda.new(agenda_params)
 
-      respond_to do |format|
-        if @agenda.save
-          format.html { redirect_to @agenda }
-          format.json { render :show, status: :created, location: @agenda }
-        else
-          format.html { render :new }
-          format.json { render json: @agenda.errors, status: :unprocessable_entity }
-        end
+      if @agenda.save
+        flash[:success] = 'Pauta criada com sucesso'
+        redirect_to agendas_path
+      else
+        flash.now[:danger] = 'Campos inválidos'
+        render 'new'
       end
     else
       flash.now[:danger] = 'Você não possui autorização'
@@ -64,14 +62,12 @@ class AgendasController < ApplicationController
   # PATCH/PUT /agendas/1.json
   def update
     if logged_in?
-      respond_to do |format|
-        if @agenda.update(agenda_params)
-          format.html { redirect_to @agenda }
-          format.json { render :show, status: :ok, location: @agenda }
-        else
-          format.html { render :edit }
-          format.json { render json: @agenda.errors, status: :unprocessable_entity }
-        end
+      if @agenda.update(agenda_params)
+        flash[:success] = 'Pauta editada com sucesso'
+        redirect_to agendas_path
+      else
+        flash.now[:danger] = 'Campos inválidos'
+        render 'edit'
       end
     else
       flash.now[:danger] = 'Você não possui autorização'
@@ -84,10 +80,8 @@ class AgendasController < ApplicationController
   def destroy
     if logged_in?
       @agenda.destroy
-      respond_to do |format|
-        format.html { redirect_to agendas_url }
-        format.json { head :no_content }
-      end
+      flash[:success] = 'Pauta deletada com sucesso'
+      redirect_to agendas_path
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'

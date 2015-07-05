@@ -26,7 +26,7 @@ class MeetingsController < ApplicationController
   def new
     if logged_in?
       @meeting = Meeting.new
-      10.times {
+      5.times {
         @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id]) }
     else
       flash.now[:danger] = 'Somente membros podem adicionar reuniões'
@@ -37,7 +37,8 @@ class MeetingsController < ApplicationController
   # GET /meetings/1/edit
   def edit
     if logged_in?
-      @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id])
+      5.times {
+        @meeting_has_members = @meeting.meeting_has_members.build(params[:member_id]) }
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
@@ -51,15 +52,13 @@ class MeetingsController < ApplicationController
       @meeting = Meeting.new(meeting_params)
       @meeting.criador_reuniao(current_user)
 
-      respond_to do |format|
         if @meeting.save
-          format.html { redirect_to @meeting }
-          format.json { render :show, status: :created, location: @meeting }
+          flash[:success] = 'Criado com sucesso'
+          redirect_to meetings_path
         else
-          format.html { render :new }
-          format.json { render json: @meeting.errors, status: :unprocessable_entity }
+          flash.now[:danger] = 'Campos inválidos'
+          render 'new'
         end
-      end
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
@@ -70,15 +69,13 @@ class MeetingsController < ApplicationController
   # PATCH/PUT /meetings/1.json
   def update
     if logged_in?
-      respond_to do |format|
-      if @meeting.update(meeting_params)
-        format.html { redirect_to @meeting }
-        format.json { render :show, status: :ok, location: @meeting }
-      else
-        format.html { render :edit }
-        format.json { render json: @meeting.errors, status: :unprocessable_entity }
-      end
-      end
+        if @meeting.update(meeting_params)
+          flash.now[:success] = 'Atualizado com sucesso'
+          render 'show'
+        else
+          flash.now[:danger] = 'Campos inválidos'
+          render 'edit'
+        end
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
@@ -90,10 +87,8 @@ class MeetingsController < ApplicationController
   def destroy
     if logged_in?
       @meeting.destroy
-      respond_to do |format|
-        format.html { redirect_to meetings_url }
-        format.json { head :no_content }
-      end
+      flash[:success] = 'Deletado com sucesso'
+      redirect_to meetings_path
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
