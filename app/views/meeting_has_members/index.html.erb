@@ -1,19 +1,19 @@
 <div class="container col-md-12 text-center well">
-    <div class="row"><h1>Listing Meeting Has Members</h1></div>
+    <div class="row"><h1>Membros em Reunião</h1></div>
 </div>
 
 <div class="row">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th class="col-md-6">Meeting</th>
-          <th class="col-md-6">Member</th>
+          <th class="col-md-6">Reunião</th>
+          <th class="col-md-6">Membro</th>
           <th colspan="3"></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @meeting_has_members.each do |meeting_has_member| %>
+        <% @meeting_has_members.order(:member_id).each do |meeting_has_member| %>
           <tr>
             <td class="col-md-6"><%= meeting_has_member.pega_reuniao  %></td>
             <% if meeting_has_member.member_id %>
@@ -33,5 +33,5 @@
 <br>
 
 <div class="container">
-    <div class="row text-center col-md-12"><%= link_to 'New Meeting has member', new_meeting_has_member_path, class: "btn btn-primary" %></div>
+    <div class="row text-center col-md-12"><%= link_to 'Adicionar Membro a uma Reunião', new_meeting_has_member_path, class: "btn btn-primary" %></div>
 </div>

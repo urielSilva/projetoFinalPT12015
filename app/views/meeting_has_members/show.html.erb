@@ -1,35 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center col-md-12 well">
+    <p>
+      <strong>Reunião:</strong><br>
+      <%= @meeting_has_member.pega_reuniao %>
+    </p>
 
-<p>
-  <strong>Meeting:</strong>
-  <%= @meeting_has_member.pega_reuniao %>
-</p>
-
-  <strong>Member:</strong>
-  <% if @meeting_has_member.member_id %>
-    <%= @meeting_has_member.pega_membro %>
-  <% else %>
-    Não possui membros
-  <% end %>
-</p>
-  <strong>Mandotory:</strong>
-  <% if @meeting_has_member.meeting_mandatory ==0 %>
-  	obrigatório
-  <% else %>
-    não obrigado
-  <% end %>
-</p>
-  <p>
-   <strong>Presence:</strong>
-  <% case @meeting_has_member.meeting_presence %> 
-    <% when 1 %> 
-      faltou 
-    <% when 2 %>
-      falta justificada
-     <% when 3%>
-      presente
-    <% end %>
-</p>
-
-<%= link_to 'Edit', edit_meeting_has_member_path(@meeting_has_member) %>
-<%= link_to 'Back', meeting_has_members_path %>
+      <strong>Membro:</strong><br>
+      <% if @meeting_has_member.member_id %>
+        <%= @meeting_has_member.pega_membro %>
+      <% else %>
+        Não possui membros
+      <% end %>
+    </p>
+      <strong>Obrigatoriedade:</strong><br>
+      <% if @meeting_has_member.meeting_mandatory ==0 %>
+        Obrigatório
+      <% else %>
+        Optativo
+      <% end %>
+    </p>
+      <p>
+       <strong>Presença:</strong><br>
+      <% case @meeting_has_member.meeting_presence %>
+        <% when 1 %>
+          Faltou
+        <% when 2 %>
+          Falta Justificada
+         <% when 3%>
+          Presente
+        <% end %>
+    </p>
+</div>
+<div class="row text-center">
+    <%= link_to 'Editar', edit_meeting_has_member_path(@meeting_has_member), class:'btn btn-default' %>
+    <%= link_to 'Voltar', meeting_has_members_path, class:'btn btn-default' %>
+</div>

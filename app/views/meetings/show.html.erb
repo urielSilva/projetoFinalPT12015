@@ -1,26 +1,26 @@
 <div class="text-center well col-md-12">
   <div class="row">
         <p>
-          <strong>Reunião:</strong>
+          <strong>Reunião:</strong><br>
           <%= @meeting.meeting_name %>
         </p>
         <p>
-          <strong>Meeting description:</strong>
+          <strong>Descrição:</strong><br>
           <%= @meeting.meeting_description %>
         </p>
 
         <p>
-          <strong>Meeting date:</strong>
+          <strong>Data:</strong><br>
           <%= @meeting.meeting_date %>
         </p>
 
         <p>
-          <strong>Agenda id:</strong>
+          <strong>Pauta:</strong><br>
           <%= @meeting.pega_nome %>
         </p>
 
         <p>
-          <strong>Membros:</strong>
+          <strong>Membros:</strong><br>
             <% @meeting.meeting_has_members.find_each do |m| %>
                 <%= m.member.member_name %><br>
             <% end %>
