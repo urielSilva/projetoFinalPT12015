@@ -41,4 +41,9 @@ class Member < ActiveRecord::Base
     self.member_password==password
   end
 
+  def reuniao_vazio?
+     if self.meeting_has_members.count == 0
+     end
+  end
+
 end

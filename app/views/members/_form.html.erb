@@ -1,33 +1,31 @@
-<%= form_for(@member) do |f| %>
-  <% if @member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+<div class="text-center well">
+    <%= form_for(@member) do |f| %>
 
-      <ul>
-      <% @member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="field form-group">
+        <%= f.label :member_name, 'Nome' %><br>
+        <%= f.text_field :member_name, class: "form-control"%>
+      </div>
+      <div class="field form-group">
+        <%= f.label :member_email, 'Email' %><br>
+        <%= f.text_field :member_email, class:"form-control" %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :member_password, 'Senha' %><br>
+        <%= f.password_field :member_password, class:"form-control" %>
+      </div>
+      <div class="field form-group">
+        <%= f.label :job_id, 'Cargo' %>
+        <%= f.select :job_id, Job.all.collect { |j| [j.job_name, j.id]}, class:"form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :member_name %><br>
-    <%= f.text_field :member_name %>
-  </div>
-  <div class="field">
-    <%= f.label :member_email %><br>
-    <%= f.text_field :member_email %>
-  </div>
-  <div class="field">
-    <%= f.label :member_password %><br>
-    <%= f.password_field :member_password %>
-  </div>
-  <div class="field">
-    <%= f.label :job_id %>
-    <%= f.select :job_id, Job.all.collect { |j| [j.job_name, j.id]} %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div class="actions text-center col-md-12">
+    <%= f.submit "Criar Cargo", class:"btn btn-success" %>
+  </div><br><br>
+
+      <div class="col-md-12 text-center">
+        <%= link_to 'Voltar', members_path, class: "btn btn-default" %>
+      </div><br><br>
+
 <% end %>
+
+</div>

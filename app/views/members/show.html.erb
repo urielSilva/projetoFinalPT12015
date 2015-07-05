@@ -1,31 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center col-md-12 well">
+  <div class="row">
+        <p>
+          <strong>Nome:</strong><br>
+          <%= @member.member_name %>
+        </p>
 
-<p>
-  <strong>Member name:</strong>
-  <%= @member.member_name %>
-</p>
+        <p>
+          <strong>Email:</strong><br>
+          <%= @member.member_email %>
+        </p>
 
-<p>
-  <strong>Member email:</strong>
-  <%= @member.member_email %>
-</p>
+        <p>
+          <strong>Cargo:</strong><br>
+          <%= @member.pega_job %>
+        </p>
 
-<p>
-  <strong>Member password:</strong>
-  <%= @member.member_password %>
-</p>
+        <p>
+          <strong>Reuniões: </strong><br>
+          <% if @member.reuniao_vazio? %>
+            <% @member.meeting_has_members.find_each do |m| %>
+                <%= m.meeting.meeting_name %>
+            <% end %>
+          <% else %>
+            Não está em alguma reunião
+          <% end %>
+        </p>
+  </div>
+</div><br><br>
 
-<p>
-  <strong>Member Job:</strong>
-  <%= @member.pega_job %>
-</p>
-
-<p>
-  <strong>Reuniões: </strong>
-    <% @member.meeting_has_members.find_each do |m| %>
-        <%= m.meeting.meeting_name %>
-    <% end %>
-</p>
-
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<div class="row text-center col-md-12">
+    <%= link_to 'Editar', edit_member_path(@member), class:"btn btn-default" %>
+    <%= link_to 'Voltar', members_path, class:"btn btn-default" %>
+</div>

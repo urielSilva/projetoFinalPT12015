@@ -44,15 +44,12 @@ class MembersController < ApplicationController
   def create
     if logged_in? && current_user.admin?
       @member = Member.new(member_params)
-
-      respond_to do |format|
-        if @member.save
-          format.html { redirect_to @member }
-          format.json { render :show, status: :created, location: @member }
-        else
-          format.html { render :new }
-          format.json { render json: @member.errors, status: :unprocessable_entity }
-        end
+      if @member.save
+        flash[:success] = 'Membro criado com sucesso'
+        redirect_to members_path
+      else
+        flash.now[:danger] = 'Campos inválidos'
+        render 'new'
       end
     else
       flash.now[:danger] = 'Você não possui autorização'
@@ -64,14 +61,12 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1.json
   def update
     if logged_in? && (current_user.admin? || current_user.id == @member.id)
-      respond_to do |format|
-        if @member.update(member_params)
-          format.html { redirect_to @member }
-          format.json { render :show, status: :ok, location: @member }
-        else
-          format.html { render :edit }
-          format.json { render json: @member.errors, status: :unprocessable_entity }
-        end
+      if @member.update(members_params)
+        flash[:success] = 'Membro atualizado com sucesso'
+        redirect_to members_path
+      else
+        flash.now[:danger] = 'Campos inválidos'
+        render 'edit'
       end
     else
       flash.now[:danger] = 'Você não possui autorização'
@@ -84,10 +79,8 @@ class MembersController < ApplicationController
   def destroy
     if logged_in? && current_user.admin?
       @member.destroy
-      respond_to do |format|
-        format.html { redirect_to members_url }
-        format.json { head :no_content }
-      end
+      flash[:success] = 'Membro excluído com sucesso'
+      redirect_to members_path
     else
       flash.now[:danger] = 'Você não possui autorização'
       render 'sessions/new'
