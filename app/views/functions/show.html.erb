@@ -1,19 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center col-md-12 well">
+    <p>
+      <strong>Função:</strong><br>
+      <%= @function.function_name %>
+    </p>
 
-<p>
-  <strong>Function name:</strong>
-  <%= @function.function_name %>
-</p>
+    <p>
+      <strong>Módulo:</strong><br>
+      <%= @function.function_module %>
+    </p>
 
-<p>
-  <strong>Function module:</strong>
-  <%= @function.function_module %>
-</p>
+    <p>
+      <strong>Url:</strong><br>
+      <%= @function.function_url %>
+    </p>
+</div>
 
-<p>
-  <strong>Function url:</strong>
-  <%= @function.function_url %>
-</p>
-
-<%= link_to 'Edit', edit_function_path(@function) %> |
-<%= link_to 'Back', functions_path %>
+<div class="row text-center ">
+    <%= link_to 'Editar', edit_function_path(@function), class:'btn btn-default' %>
+    <%= link_to 'Voltar', functions_path, class:'btn btn-default' %>
+</div>
