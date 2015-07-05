@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="text-center col-md-12 well">
+    <p>
+      <strong>Job:</strong><br>
+      <%= @job_has_function.job.job_name %>
+    </p>
 
-<p>
-  <strong>Job:</strong>
-  <%= @job_has_function.job_id %>
-</p>
+    <p>
+      <strong>Function:</strong><br>
+      <%= @job_has_function.function.function_name %>
+    </p>
+</div>
 
-<p>
-  <strong>Function:</strong>
-  <%= @job_has_function.function_id %>
-</p>
-
-<%= link_to 'Edit', edit_job_has_function_path(@job_has_function) %> |
-<%= link_to 'Back', job_has_functions_path %>
+<div class="row text-center ">
+    <%= link_to 'Editar', edit_job_has_function_path(@job_has_function), class:'btn btn-default' %>
+    <%= link_to 'Voltar', job_has_functions_path, class:'btn btn-default' %>
+</div>
